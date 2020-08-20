@@ -17,16 +17,18 @@ function App() {
     <div>
       <StyledPageWrapper>
         <StyledHeader>
-          {appUser && appUser.email ? (
+          {appUser.user && appUser.user.email ? (
             <StyledUserContainer>
-              <Avatar src={appUser.photoURL} />
+              <Avatar src={appUser.user.photoURL} />
               <p>
-                {appUser.displayName} ({appUser.email})
+                {appUser.user.displayName} ({appUser.user.email})
               </p>
               <button onClick={() => dispatch(signOut())}>Sign Out</button>
             </StyledUserContainer>
           ) : (
-            <button onClick={() => dispatch(googleSignIn())}>Sign In</button>
+            <button onClick={() => dispatch(googleSignIn())}>
+              Sign In using Google
+            </button>
           )}
         </StyledHeader>
         <StyledContainer>Content</StyledContainer>

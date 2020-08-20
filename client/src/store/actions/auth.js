@@ -37,8 +37,7 @@ export const googleSignIn = () => async (dispatch) => {
           user,
           payload: "Your account was successfully created using Google auth!",
         })
-      )
-      .then((data) => console.log(data));
+      );
   } catch (err) {
     dispatch({
       type: "SIGNUP_ERROR",

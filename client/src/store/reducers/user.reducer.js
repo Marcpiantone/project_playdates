@@ -27,5 +27,5 @@ export default function authReducer(state = initialState, action) {
 }
 
 export const getAppUser = (state) => {
-  return state.appUser;
+  return state.appUser.appUser;
 };
