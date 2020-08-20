@@ -1,15 +1,18 @@
 import React, { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import "./App.css";
+import Avatar from "./Avatar";
 
-import { AppContext } from "./AppContext";
-
-import Avatar from "./components/Avatar";
+import { googleSignIn, signOut } from "../store/actions/auth";
+import { getAppUser } from "../store/reducers/user.reducer";
 
 function App() {
-  const { appUser, signInWithGoogle } = useContext(AppContext);
+  const appUser = useSelector(getAppUser);
   console.log(appUser);
+
+  const dispatch = useDispatch();
+
   return (
     <div>
       <StyledPageWrapper>
@@ -20,9 +23,10 @@ function App() {
               <p>
                 {appUser.displayName} ({appUser.email})
               </p>
+              <button onClick={() => dispatch(signOut())}>Sign Out</button>
             </StyledUserContainer>
           ) : (
-            <button onClick={signInWithGoogle}>Sign In</button>
+            <button onClick={() => dispatch(googleSignIn())}>Sign In</button>
           )}
         </StyledHeader>
         <StyledContainer>Content</StyledContainer>
