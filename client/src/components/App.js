@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
+import GlobalStyles from "./GlobalStyles";
 import Header from "./Header";
 
 function App() {
   return (
     <div>
       <StyledPageWrapper>
+        <GlobalStyles />
         <Header />
         <StyledContainer>Content</StyledContainer>
       </StyledPageWrapper>

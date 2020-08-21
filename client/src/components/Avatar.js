@@ -5,8 +5,10 @@ const Avatar = ({ src }) => <StyledAvatar src={src} />;
 
 const StyledAvatar = styled.img`
   border-radius: 50%;
-  height: 36px;
-  width: 36px;
+  height: 40px;
+  width: 40px;
+  border: 2px solid white;
+  margin: 4px;
 `;
 
 export default Avatar;
