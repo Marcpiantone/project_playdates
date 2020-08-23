@@ -50,7 +50,7 @@ const createTribe = async (req, res) => {
   client.close();
 };
 
-const handleTribeById = async (req, res) => {
+const handleTribesById = async (req, res) => {
   const creatorId = req.params.creatorId;
   const client = await MongoClient(MONGO_URI, options);
 
@@ -74,5 +74,5 @@ const handleTribeById = async (req, res) => {
 module.exports = {
   handleTribes,
   createTribe,
-  handleTribeById,
+  handleTribesById,
 };

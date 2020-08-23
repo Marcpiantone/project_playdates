@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import GlobalStyles from "./GlobalStyles";
+import { numbers } from "./GlobalStyles";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
@@ -16,20 +17,22 @@ function App() {
       <GlobalStyles />
       <Router>
         <Header />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/landing">
-            <LandingPage />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-        </Switch>
+        <StyledPage>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/landing">
+              <LandingPage />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+          </Switch>
+        </StyledPage>
         <Footer />
       </Router>
     </StyledPageWrapper>
@@ -41,9 +44,9 @@ const StyledPageWrapper = styled.div`
   height: 100vh;
 `;
 
-const StyledContainer = styled.div`
-  min-height: 400px;
-  padding: 14px;
+const StyledPage = styled.div`
+  /* height: calc(100vh- (2 * ${numbers.headerFooterHeight})); */
+  height : 600px;
 `;
 
 export default App;

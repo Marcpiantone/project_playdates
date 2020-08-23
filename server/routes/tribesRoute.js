@@ -2,13 +2,13 @@ const express = require("express");
 const {
   handleTribes,
   createTribe,
-  handleTribeById,
+  handleTribesById,
 } = require("./handlers/tribesHandlers");
 const router = express.Router();
 
 // define the /tribes routes
 router.get("/", handleTribes);
-router.get("/:creatorId", handleTribeById);
+router.get("/:creatorId", handleTribesById);
 router.post("/", createTribe);
 
 module.exports = router;
