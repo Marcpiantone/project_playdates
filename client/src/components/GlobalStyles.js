@@ -20,10 +20,8 @@ body {
   html, body {
     /* font-family: 'Notable',"Comic Sans MS", sans-serif; */
     max-width: 100vw;
-    width:100%
-
-    
-  }
+    width: 100%;
+}
 
 
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -80,6 +78,10 @@ body {
 
   a{text-decoration: none;}
 
+  #root{
+      height:100%;
+  }
+
 `;
 
 export const colors = {
@@ -89,6 +91,11 @@ export const colors = {
   lighttext: "#FFFFFF", //WHITE
   darktext: "#073B4C", //MIDNIGHT GREEN EAGLE GREEN
   accent: "#EF476F", //PARADISE PINK
+  shadow: "#d4d4d4", //SOME GREY
+};
+
+export const numbers = {
+  headerFooterHeight: "80px",
 };
 
 export default GlobalStyles;

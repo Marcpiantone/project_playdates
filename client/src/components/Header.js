@@ -2,27 +2,28 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 import { googleSignIn, signOut } from "../store/actions/auth";
 import { getAppUser } from "../store/reducers/user.reducer";
 
-import Avatar from "./Avatar";
 import logo from "../assets/2552289-200_white.png";
-import { colors } from "./GlobalStyles";
+import { colors, numbers } from "./GlobalStyles";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
   const appUser = useSelector(getAppUser);
+  console.log(appUser);
   const user = appUser.user ? appUser.user : null;
   const userFirstname = user ? user.displayName.split(" ")[0] : null;
 
   return (
     <StyledHeader>
-      <StyledTitleContainer>
+      <StyledTitleContainerLink to="/">
         <Logo src={logo} alt={"Tribes_logo"} />
         <TitleSpan>TRIBES</TitleSpan>
-      </StyledTitleContainer>
+      </StyledTitleContainerLink>
       {/* {user && user.email ? ( */}
       <>
         <StyledUserContainer>
@@ -34,42 +35,52 @@ const Header = () => {
             {!isHovered && <MenuDiv>⪢</MenuDiv>}
             {isHovered && <MenuDiv>⪡</MenuDiv>}
           </StyledUserP>
-          {/* <StyledButton onClick={() => dispatch(signOut())}>
-              Log out
-            </StyledButton> */}
         </StyledUserContainer>
         {isHovered && (
           <MenuUL
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <LI>Profile</LI>
-            <LI>Log Out</LI>
+            <LI>
+              <StyledNavLink to="/profile">Profile</StyledNavLink>
+            </LI>
+            <LI>
+              <StyledNavLink to="/" onClick={() => dispatch(signOut())}>
+                Log out
+              </StyledNavLink>
+            </LI>
           </MenuUL>
         )}
       </>
-      {/* // ) : ( */}
-      {/* //     <StyledUserContainer>
-    //       <StyledButton onClick={() => dispatch(googleSignIn())}>
-    //         Log in
-    //       </StyledButton>
-    //     </StyledUserContainer>
-    //   )} */}
+      {/* ) : ( */}
+      {/* <StyledUserContainer>
+          <StyledButton onClick={() => dispatch(googleSignIn())}>
+            Log in
+          </StyledButton>
+        </StyledUserContainer>
+      )} */}
     </StyledHeader>
   );
 };
 
-const StyledHeader = styled.nav`
+const StyledHeader = styled.div`
   background: ${colors.primary};
+  top: 0px;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: ${numbers.headerFooterHeight};
 `;
 
-const StyledTitleContainer = styled.div`
+const StyledTitleContainerLink = styled(NavLink)`
+  color: white;
   display: flex;
   align-items: center;
   padding: 5px;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 const Logo = styled.img`
@@ -77,7 +88,7 @@ const Logo = styled.img`
 `;
 
 const TitleSpan = styled.span`
-  font-size: 2.5em;
+  font-size: 2em;
 `;
 
 const StyledUserContainer = styled.div`
@@ -85,15 +96,21 @@ const StyledUserContainer = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  height: 80px;
+  height: ${numbers.headerFooterHeight};
 `;
 
 const StyledUserP = styled.p`
   height: 100%;
+  z-index: 2;
+  height: 100%;
   display: flex;
   align-items: center;
-  width: 200px;
+  min-width: 150px;
   justify-content: center;
+  cursor: default;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 const MenuDiv = styled.span`
@@ -104,16 +121,28 @@ const MenuDiv = styled.span`
 
 const MenuUL = styled.ul`
   background-color: ${colors.secondary};
-  z-index: 2;
-  top: 80px;
+  z-index: 1;
+  top: ${numbers.headerFooterHeight};
   position: absolute;
   list-style-type: none;
   right: 0px;
-  width: 200px;
+  min-width: 150px;
+  padding: 5px;
+  box-shadow: 0px 5px 15px 0px ${colors.shadow};
 `;
 
 const LI = styled.li`
-  margin-left: 30px;
+  padding-left: 30px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  cursor: pointer;
+  :hover {
+    opacity: 0.5;
+  }
+`;
+
+const StyledNavLink = styled(NavLink)`
+  color: white;
 `;
 
 const StyledButton = styled.button`
