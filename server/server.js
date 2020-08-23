@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
 
 const PORT = 8000;
 
@@ -9,6 +10,9 @@ const tribes = require("./routes/tribesRoute");
 
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(express.static("public"));
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) =>
   res.status(200).json("Welcome to Tribes, try /tribes")

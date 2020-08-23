@@ -14,8 +14,10 @@ const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
   const appUser = useSelector(getAppUser);
-  console.log(appUser);
   const user = appUser.user ? appUser.user : null;
+  if (user) {
+    console.log(user.uid + " " + user.email);
+  }
   const userFirstname = user ? user.displayName.split(" ")[0] : null;
 
   return (
@@ -24,41 +26,41 @@ const Header = () => {
         <Logo src={logo} alt={"Tribes_logo"} />
         <TitleSpan>TRIBES</TitleSpan>
       </StyledTitleContainerLink>
-      {/* {user && user.email ? ( */}
-      <>
+      {user && user.email ? (
+        <>
+          <StyledUserContainer>
+            <StyledUserP
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              Welcome, {userFirstname}
+              {!isHovered && <MenuDiv>⪢</MenuDiv>}
+              {isHovered && <MenuDiv>⪡</MenuDiv>}
+            </StyledUserP>
+          </StyledUserContainer>
+          {isHovered && (
+            <MenuUL
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <LI>
+                <StyledNavLink to="/profile">Profile</StyledNavLink>
+              </LI>
+              <LI>
+                <StyledNavLink to="/" onClick={() => dispatch(signOut())}>
+                  Log out
+                </StyledNavLink>
+              </LI>
+            </MenuUL>
+          )}
+        </>
+      ) : (
         <StyledUserContainer>
-          <StyledUserP
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            Welcome, {userFirstname}
-            {!isHovered && <MenuDiv>⪢</MenuDiv>}
-            {isHovered && <MenuDiv>⪡</MenuDiv>}
-          </StyledUserP>
-        </StyledUserContainer>
-        {isHovered && (
-          <MenuUL
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <LI>
-              <StyledNavLink to="/profile">Profile</StyledNavLink>
-            </LI>
-            <LI>
-              <StyledNavLink to="/" onClick={() => dispatch(signOut())}>
-                Log out
-              </StyledNavLink>
-            </LI>
-          </MenuUL>
-        )}
-      </>
-      {/* ) : ( */}
-      {/* <StyledUserContainer>
           <StyledButton onClick={() => dispatch(googleSignIn())}>
             Log in
           </StyledButton>
         </StyledUserContainer>
-      )} */}
+      )}
     </StyledHeader>
   );
 };
