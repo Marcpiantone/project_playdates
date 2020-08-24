@@ -8,6 +8,9 @@ export default function tribesReducer(state = initialState, action) {
     case "RECEIVE_TRIBES": {
       return { ...state, tribes: action.tribes, status: "idle" };
     }
+    case "CLEAR_TRIBES": {
+      return initialState;
+    }
     default: {
       return state;
     }

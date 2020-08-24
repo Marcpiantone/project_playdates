@@ -35,7 +35,7 @@ const Home = () => {
   }, [userUid, TribesGrid]);
 
   return (
-    <DIV>
+    <DIV className={"PageWrapper"}>
       {!user ? (
         <LandingPage />
       ) : isLoading ? (

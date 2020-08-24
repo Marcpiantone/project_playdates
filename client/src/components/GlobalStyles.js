@@ -20,7 +20,6 @@ body {
   html, body {
     /* font-family: 'Notable',"Comic Sans MS", sans-serif; */
     max-width: 100vw;
-    width: 100%;
 }
 
 

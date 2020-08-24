@@ -6,6 +6,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import { googleSignIn, signOut } from "../store/actions/auth";
 import { getAppUser } from "../store/reducers/user.reducer";
+import { clearTribes } from "../store/actions/tribes";
 
 import logo from "../assets/logo_white.png";
 import { colors, numbers } from "./GlobalStyles";
@@ -24,7 +25,7 @@ const Header = () => {
   };
 
   return (
-    <StyledHeader>
+    <StyledHeader className={"Header"}>
       <StyledTitleContainerLink to="/">
         <Logo src={logo} alt={"Tribes_logo"} />
         <TitleSpan>TRIBES</TitleSpan>
@@ -50,7 +51,13 @@ const Header = () => {
                 <StyledNavLink to="/profile">Profile</StyledNavLink>
               </LI>
               <LI>
-                <StyledNavLink to="/" onClick={() => dispatch(signOut())}>
+                <StyledNavLink
+                  to="/"
+                  onClick={() => {
+                    dispatch(signOut());
+                    dispatch(clearTribes());
+                  }}
+                >
                   Log out
                 </StyledNavLink>
               </LI>
@@ -82,6 +89,7 @@ const StyledHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   height: ${numbers.headerFooterHeight};
+  padding-right: 20px;
 `;
 
 const StyledTitleContainerLink = styled(NavLink)`

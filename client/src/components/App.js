@@ -14,7 +14,7 @@ import Fourofour from "./Fourofour";
 
 function App() {
   return (
-    <StyledPageWrapper>
+    <StyledPageWrapper className={"PageWrapper"}>
       <GlobalStyles />
       <Router>
         <Header />
@@ -34,12 +34,14 @@ function App() {
 
 const StyledPageWrapper = styled.div`
   position: relative;
-  height: 100vh;
+  height: 100%;
 `;
 
 const StyledPage = styled.div`
-  /* height: calc(100vh- (2 * ${numbers.headerFooterHeight})); */
-  height : 600px;
+  min-height: calc(100vh - ${numbers.headerFooterHeight}*2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default App;

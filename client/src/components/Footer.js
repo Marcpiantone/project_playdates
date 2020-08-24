@@ -15,14 +15,14 @@ const Footer = () => {
 };
 
 const StyledFooterDiv = styled.div`
-  bottom: 0px;
+  bottom: -${numbers.headerFooterHeight};
   position: absolute;
   background: ${colors.accent};
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: ${numbers.headerFooterHeight};
-  width: 100vw;
+  width: 100%;
 `;
 
 const LinkBox = styled.div`
