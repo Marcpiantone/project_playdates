@@ -1,5 +1,5 @@
 //Login + Navlinks
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { NavLink, useHistory } from "react-router-dom";
@@ -10,14 +10,28 @@ import { clearTribes } from "../store/actions/tribes";
 
 import logo from "../assets/logo_white.png";
 import { colors, numbers } from "./GlobalStyles";
+import { useCookies } from "react-cookie";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [cookies, setCookie] = useCookies(["returningUser"]);
+
   const dispatch = useDispatch();
   const history = useHistory();
-  const appUser = useSelector(getAppUser);
-  const user = appUser.user ? appUser.user : null;
 
+  const appUser = useSelector(getAppUser);
+
+  useEffect(() => {
+    if (!appUser.user) {
+      return;
+    }
+    console.log("SETTINGCOOKIE");
+    setCookie("returningUserToken", appUser.user.uid, { path: "/" });
+  }, [appUser]);
+
+  console.log(cookies.returningUserToken);
+
+  const user = appUser.user ? appUser.user : null;
   const userFirstname = user ? user.displayName.split(" ")[0] : null;
 
   const goHome = () => {

@@ -63,7 +63,9 @@ const handleTribesById = async (req, res) => {
     const r = await collection.find({ creatorId }).toArray();
     r[0]
       ? res.status(200).json({ status: 200, data: r })
-      : res.status(404).json({ status: 404, data: "creatorId not found" });
+      : res
+          .status(404)
+          .json({ status: 404, data: [], message: "creatorId not found, 404" });
   } catch (err) {
     console.error(err.stack);
     res.status(500).json({ status: 500, message: err.message });

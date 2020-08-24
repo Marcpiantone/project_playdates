@@ -1,5 +1,3 @@
-//My tribes... My events...
-
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import TribesGrid from "./TribesGrid";

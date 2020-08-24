@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { withCookies } from "react-cookie";
 
 import GlobalStyles from "./GlobalStyles";
 import { numbers } from "./GlobalStyles";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
-import LandingPage from "./LandingPage";
 import Profile from "./Profile";
 import About from "./About";
 import Fourofour from "./Fourofour";
+import { useSelector } from "react-redux";
+import { getAppUser } from "../store/reducers/user.reducer";
 
 function App() {
+  const appUser = useSelector(getAppUser);
+
   return (
     <StyledPageWrapper className={"PageWrapper"}>
       <GlobalStyles />
@@ -44,4 +48,4 @@ const StyledPage = styled.div`
   align-items: center;
 `;
 
-export default App;
+export default withCookies(App);

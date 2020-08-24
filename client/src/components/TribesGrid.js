@@ -4,12 +4,13 @@ import styled from "styled-components";
 import { FiPlusSquare } from "react-icons/fi";
 
 const TribesGrid = ({ tribes }) => {
+  console.log(tribes);
   return (
     <Row className={"GRID"}>
       <Grid>
-        {console.log(tribes.tribes)}
-        {tribes.tribes !== "creatorId not found" &&
-          tribes.tribes.map((tribe) => {
+        {console.log(tribes)}
+        {tribes !== [] &&
+          tribes.map((tribe) => {
             return <Tribe key={tribe.name}>{tribe.name}</Tribe>;
           })}
         <CreateTribeTile>
@@ -35,7 +36,7 @@ const Grid = styled.div`
   margin: auto;
 `;
 
-const Tribe = styled.div`
+const Tribe = styled.button`
   border-radius: 20px;
   width: 200px;
   height: 200px;
@@ -45,6 +46,11 @@ const Tribe = styled.div`
   -moz-box-shadow: 0px 0px 20px 2px rgba(204, 204, 204, 1);
   box-shadow: 0px 0px 20px 2px rgba(204, 204, 204, 1);
   text-decoration: none;
+  background: none;
+  border: none;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 const CreateTribeTile = styled.button`
