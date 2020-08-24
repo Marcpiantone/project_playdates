@@ -8,6 +8,7 @@ import { getAppUser } from "../store/reducers/user.reducer";
 import { receiveTribes } from "../store/actions/tribes";
 import { getTribes } from "../store/reducers/tribes.reducer";
 import Loading from "./Loading";
+import LandingPage from "./LandingPage";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,8 +17,6 @@ const Home = () => {
   const userUid = appUser.user ? user.uid : null;
   const tribesState = useSelector(getTribes);
   const isLoading = tribesState.status === "loading";
-
-  console.log(isLoading);
 
   const handleTribes = (userUid) => {
     fetch(`/tribes/${userUid}`)
@@ -33,9 +32,19 @@ const Home = () => {
       return;
     }
     handleTribes(userUid);
-  }, [userUid]);
+  }, [userUid, TribesGrid]);
 
-  return <DIV>{isLoading ? <Loading /> : <TribesGrid></TribesGrid>}</DIV>;
+  return (
+    <DIV>
+      {!user ? (
+        <LandingPage />
+      ) : isLoading ? (
+        <Loading />
+      ) : (
+        <TribesGrid tribes={tribesState.tribes}></TribesGrid>
+      )}
+    </DIV>
+  );
 };
 
 const DIV = styled.div`

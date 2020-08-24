@@ -10,6 +10,7 @@ import Home from "./Home";
 import LandingPage from "./LandingPage";
 import Profile from "./Profile";
 import About from "./About";
+import Fourofour from "./Fourofour";
 
 function App() {
   return (
@@ -19,18 +20,10 @@ function App() {
         <Header />
         <StyledPage>
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/landing">
-              <LandingPage />
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/about" component={About} />
+            <Route component={Fourofour} />
           </Switch>
         </StyledPage>
         <Footer />

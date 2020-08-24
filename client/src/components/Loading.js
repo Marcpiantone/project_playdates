@@ -2,7 +2,7 @@ import React from "react";
 
 import styled, { keyframes } from "styled-components";
 
-import logo from "../assets/2552289-200_black.png";
+import logo from "../assets/logo_black.png";
 
 const Loading = () => {
   return (

@@ -8,7 +8,11 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const LandingPage = () => {
-  return <div>Landing Page HERE</div>;
+  return <DIV>Landing Page HERE</DIV>;
 };
+
+const DIV = styled.div`
+  color: black;
+`;
 
 export default LandingPage;

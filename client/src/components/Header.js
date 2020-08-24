@@ -2,23 +2,26 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 import { googleSignIn, signOut } from "../store/actions/auth";
 import { getAppUser } from "../store/reducers/user.reducer";
 
-import logo from "../assets/2552289-200_white.png";
+import logo from "../assets/logo_white.png";
 import { colors, numbers } from "./GlobalStyles";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
   const appUser = useSelector(getAppUser);
   const user = appUser.user ? appUser.user : null;
-  if (user) {
-    console.log(user.uid + " " + user.email);
-  }
+
   const userFirstname = user ? user.displayName.split(" ")[0] : null;
+
+  const goHome = () => {
+    history.push("/");
+  };
 
   return (
     <StyledHeader>
@@ -56,7 +59,13 @@ const Header = () => {
         </>
       ) : (
         <StyledUserContainer>
-          <StyledButton onClick={() => dispatch(googleSignIn())}>
+          <StyledButton
+            onClick={() => {
+              dispatch(googleSignIn());
+              setIsHovered(false);
+              goHome();
+            }}
+          >
             Log in
           </StyledButton>
         </StyledUserContainer>
