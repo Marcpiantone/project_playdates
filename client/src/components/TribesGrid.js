@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FiPlusSquare } from "react-icons/fi";
+import { NavLink } from "react-router-dom";
 
 const TribesGrid = ({ tribes }) => {
   console.log(tribes);
@@ -13,7 +14,7 @@ const TribesGrid = ({ tribes }) => {
           tribes.map((tribe) => {
             return <Tribe key={tribe.name}>{tribe.name}</Tribe>;
           })}
-        <CreateTribeTile>
+        <CreateTribeTile to="/newtribe">
           <Plus /> Create a new Tribe
         </CreateTribeTile>
       </Grid>
@@ -53,7 +54,7 @@ const Tribe = styled.button`
   }
 `;
 
-const CreateTribeTile = styled.button`
+const CreateTribeTile = styled(NavLink)`
   color: black;
   display: flex;
   flex-direction: column;

@@ -10,6 +10,7 @@ import Home from "./Home";
 import Profile from "./Profile";
 import About from "./About";
 import Fourofour from "./Fourofour";
+import NewTribe from "./NewTribe";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/newtribe" component={NewTribe} />
             <Route component={Fourofour} />
           </Switch>
         </StyledPage>

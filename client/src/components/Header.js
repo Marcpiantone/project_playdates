@@ -48,7 +48,7 @@ const Header = () => {
         <TitleSpan>TRIBES</TitleSpan>
       </StyledTitleContainerLink>
       {status === "loading" ? (
-        <StyledUserContainer></StyledUserContainer>
+        <></>
       ) : status === "idle" ? (
         <>
           <StyledUserContainer>
@@ -154,7 +154,7 @@ const StyledUserP = styled.p`
   min-width: 150px;
   justify-content: center;
   cursor: default;
-  animation: ${fadeIn} 1000ms linear;
+  animation: ${fadeIn} 700ms linear;
   &:hover {
     opacity: 0.5;
   }
