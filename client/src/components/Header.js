@@ -1,7 +1,7 @@
 //Login + Navlinks
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { NavLink, useHistory } from "react-router-dom";
 
 import {
@@ -48,7 +48,7 @@ const Header = () => {
         <TitleSpan>TRIBES</TitleSpan>
       </StyledTitleContainerLink>
       {status === "loading" ? (
-        <StyledUserContainer>...loading</StyledUserContainer>
+        <StyledUserContainer></StyledUserContainer>
       ) : status === "idle" ? (
         <>
           <StyledUserContainer>
@@ -137,6 +137,14 @@ const StyledUserContainer = styled.div`
   height: ${numbers.headerFooterHeight};
 `;
 
+const fadeIn = keyframes`
+  from {
+opacity:0.1
+  }
+  to {
+  opacity:1
+  }`;
+
 const StyledUserP = styled.p`
   height: 100%;
   z-index: 2;
@@ -146,6 +154,7 @@ const StyledUserP = styled.p`
   min-width: 150px;
   justify-content: center;
   cursor: default;
+  animation: ${fadeIn} 1000ms linear;
   &:hover {
     opacity: 0.5;
   }
