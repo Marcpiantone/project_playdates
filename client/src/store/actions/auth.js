@@ -1,5 +1,26 @@
 import firebase from "../../services/firebase";
 
+//Check if there's someone already signed in
+
+export const returningUserSignin = () => async (dispatch) => {
+  try {
+    dispatch({ type: "REQUEST_RETURN" });
+    firebase.auth().onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        dispatch({
+          type: "RETURN_SUCCESS",
+          user,
+        });
+      } else {
+        dispatch({ type: "RETURN_UNSUCCESS" });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // Signing up with Firebase 1. Email
 export const signup = (email, password) => async (dispatch) => {
   try {
@@ -27,7 +48,7 @@ export const signup = (email, password) => async (dispatch) => {
 
 export const googleSignIn = () => async (dispatch) => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
   try {
     firebase
       .auth()
@@ -36,7 +57,6 @@ export const googleSignIn = () => async (dispatch) => {
         dispatch({
           type: "SIGNUP_SUCCESS",
           user,
-          payload: "Your account was successfully created using Google auth!",
         })
       );
   } catch (err) {

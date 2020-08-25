@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { withCookies } from "react-cookie";
 
 import GlobalStyles from "./GlobalStyles";
 import { numbers } from "./GlobalStyles";
@@ -11,12 +10,8 @@ import Home from "./Home";
 import Profile from "./Profile";
 import About from "./About";
 import Fourofour from "./Fourofour";
-import { useSelector } from "react-redux";
-import { getAppUser } from "../store/reducers/user.reducer";
 
 function App() {
-  const appUser = useSelector(getAppUser);
-
   return (
     <StyledPageWrapper className={"PageWrapper"}>
       <GlobalStyles />
@@ -48,4 +43,4 @@ const StyledPage = styled.div`
   align-items: center;
 `;
 
-export default withCookies(App);
+export default App;

@@ -4,35 +4,38 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { NavLink, useHistory } from "react-router-dom";
 
-import { googleSignIn, signOut } from "../store/actions/auth";
-import { getAppUser } from "../store/reducers/user.reducer";
+import {
+  googleSignIn,
+  signOut,
+  returningUserSignin,
+} from "../store/actions/auth";
+import { getAppUser, getAppUserStatus } from "../store/reducers/user.reducer";
 import { clearTribes } from "../store/actions/tribes";
 
 import logo from "../assets/logo_white.png";
 import { colors, numbers } from "./GlobalStyles";
-import { useCookies } from "react-cookie";
+import Loading from "./Loading";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const [cookies, setCookie] = useCookies(["returningUser"]);
-
+  // const [cookies, setCookie] = useCookies(["returningUser"]);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const appUser = useSelector(getAppUser);
 
+  const status = useSelector(getAppUserStatus);
+
+  console.log(status);
+
   useEffect(() => {
-    if (!appUser.user) {
-      return;
-    }
-    console.log("SETTINGCOOKIE");
-    setCookie("returningUser", appUser.user, { path: "/" });
-  }, [appUser]);
+    console.log("SOMETHING WORKS");
+    dispatch(returningUserSignin());
+  }, []);
 
-  console.log(cookies.returningUser);
-
-  const user = appUser.user ? appUser.user : null;
-  const userFirstname = user ? user.displayName.split(" ")[0] : null;
+  const userFirstname = appUser.displayName
+    ? appUser.displayName.split(" ")[0]
+    : null;
 
   const goHome = () => {
     history.push("/");
@@ -44,7 +47,9 @@ const Header = () => {
         <Logo src={logo} alt={"Tribes_logo"} />
         <TitleSpan>TRIBES</TitleSpan>
       </StyledTitleContainerLink>
-      {user && user.email ? (
+      {status === "loading" ? (
+        <StyledUserContainer>...loading</StyledUserContainer>
+      ) : status === "idle" ? (
         <>
           <StyledUserContainer>
             <StyledUserP

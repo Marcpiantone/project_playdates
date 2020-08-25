@@ -11,8 +11,7 @@ import LandingPage from "./LandingPage";
 const Home = () => {
   const dispatch = useDispatch();
   const appUser = useSelector(getAppUser);
-  const user = appUser.user ? appUser.user : null;
-  const userUid = appUser.user ? user.uid : null;
+  const userUid = appUser ? appUser.uid : null;
   const tribesState = useSelector(getTribes);
   const isLoading = tribesState.status === "loading";
 
@@ -25,17 +24,19 @@ const Home = () => {
       })
       .catch((err) => console.log(err));
   };
-  console.log(!user);
+  console.log(userUid);
+  console.log(!userUid);
+
   useEffect(() => {
-    if (!user) {
+    if (!userUid) {
       return;
     }
     handleTribes(userUid);
-  }, [userUid, DIV]);
+  }, [userUid]);
 
   return (
     <DIV className={"PageWrapper"}>
-      {!user ? (
+      {!userUid ? (
         <LandingPage />
       ) : isLoading ? (
         <Loading />
