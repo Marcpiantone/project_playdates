@@ -3,6 +3,10 @@ export const receiveTribes = (tribes) => ({
   tribes,
 });
 
+export const requestTribes = () => ({
+  type: "REQUEST_TRIBES",
+});
+
 export const clearTribes = () => ({
   type: "CLEAR_TRIBES",
 });

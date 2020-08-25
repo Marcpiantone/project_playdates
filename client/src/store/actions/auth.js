@@ -27,6 +27,7 @@ export const signup = (email, password) => async (dispatch) => {
 
 export const googleSignIn = () => async (dispatch) => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
   try {
     firebase
       .auth()

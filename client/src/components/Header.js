@@ -26,10 +26,10 @@ const Header = () => {
       return;
     }
     console.log("SETTINGCOOKIE");
-    setCookie("returningUserToken", appUser.user.uid, { path: "/" });
+    setCookie("returningUser", appUser.user, { path: "/" });
   }, [appUser]);
 
-  console.log(cookies.returningUserToken);
+  console.log(cookies.returningUser);
 
   const user = appUser.user ? appUser.user : null;
   const userFirstname = user ? user.displayName.split(" ")[0] : null;

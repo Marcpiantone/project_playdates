@@ -3,7 +3,7 @@ import styled from "styled-components";
 import TribesGrid from "./TribesGrid";
 import { useDispatch, useSelector } from "react-redux";
 import { getAppUser } from "../store/reducers/user.reducer";
-import { receiveTribes } from "../store/actions/tribes";
+import { receiveTribes, requestTribes } from "../store/actions/tribes";
 import { getTribes } from "../store/reducers/tribes.reducer";
 import Loading from "./Loading";
 import LandingPage from "./LandingPage";
@@ -17,6 +17,7 @@ const Home = () => {
   const isLoading = tribesState.status === "loading";
 
   const handleTribes = (userUid) => {
+    dispatch(requestTribes());
     fetch(`/tribes/${userUid}`)
       .then((res) => res.json())
       .then((json) => {
@@ -30,7 +31,7 @@ const Home = () => {
       return;
     }
     handleTribes(userUid);
-  }, [userUid, TribesGrid]);
+  }, [userUid, DIV]);
 
   return (
     <DIV className={"PageWrapper"}>
