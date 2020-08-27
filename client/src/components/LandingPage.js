@@ -5,7 +5,7 @@
 import React from "react";
 import totemsArray from "../assets/tribes-totems/svgarray";
 import { totems } from "../assets/tribes-totems/totems";
-import { totemColors } from "./GlobalStyles";
+import { totemColors, randomColorSelector } from "./GlobalStyles";
 import styled from "styled-components";
 
 const LandingPage = () => {
@@ -19,11 +19,7 @@ const LandingPage = () => {
       })} */}
       <TotemsDIV>
         {Object.keys(totems).map((id) => {
-          const fill = Object.values(totemColors)[
-            Math.floor(
-              Math.floor(Math.random() * Object.keys(totemColors).length)
-            )
-          ];
+          const fill = randomColorSelector(totemColors);
           return (
             <SVG viewBox={"0 0 24 24"} style={{ fill }} key={id}>
               {totems[id]}

@@ -94,10 +94,20 @@ export const colors = {
 };
 
 export const totemColors = {
-  1: "#06d6a0", //CARIBBEAN GREEN
-  2: "#FFD166", //ORANGE YELLOW CRAYOLA
-  3: "#118AB2", //BLUE NCS
-  4: "#EF476F", //PARADISE PINK
+  primary: "#06d6a0", //CARIBBEAN GREEN
+  secondary: "#FFD166", //ORANGE YELLOW CRAYOLA
+  buttons: "#118AB2", //BLUE NCS
+  accent: "#EF476F", //PARADISE PINK
+};
+
+export const randomColorSelector = (colorFamily) => {
+  return Object.values(colorFamily)[
+    Math.floor(Math.random() * Object.keys(colorFamily).length)
+  ];
+};
+
+export const colorSelector = (colorFamily, id) => {
+  return Object.values(colorFamily)[id];
 };
 
 export const numbers = {

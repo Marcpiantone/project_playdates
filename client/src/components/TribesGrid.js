@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { FiPlusSquare } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import { totems } from "../assets/tribes-totems/totems";
-import { totemColors } from "./GlobalStyles";
+import { totemColors, colorSelector } from "./GlobalStyles";
 
 const TribesGrid = ({ tribes }) => {
   console.log(tribes);
@@ -16,8 +16,8 @@ const TribesGrid = ({ tribes }) => {
         {console.log(tribes)}
         {tribes !== [] &&
           tribes.map((tribe) => {
-            const fill = Object.values(totemColors)[tribe.color];
-            const color = fill;
+            const color = colorSelector(totemColors, tribe.color);
+            const fill = color;
             console.log(tribe._id);
             return (
               <Tribe key={tribe.name} to={`/tribe/${tribe._id}`}>
