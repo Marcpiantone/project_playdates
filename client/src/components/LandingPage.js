@@ -11,7 +11,7 @@ import styled from "styled-components";
 
 const LandingPage = () => {
   const totemStyle = {};
-  const svgArray = [component1];
+  //const svgArray = [component1];
   return (
     <DIV>
       Landing Page HERE
@@ -20,10 +20,9 @@ const LandingPage = () => {
       })} */}
       {Object.keys(totems).map((id) => {
         return (
-          <>
-            {id}
-            <SVG style={totemStyle}>{totems[id]}</SVG>
-          </>
+          <SVG viewBox={"5 21 80% 80%"} preserveAspectRatio={"none"} key={id}>
+            {totems[id]}
+          </SVG>
         );
       })}
     </DIV>
@@ -35,11 +34,12 @@ const DIV = styled.div`
 `;
 
 const SVG = styled.svg`
-  width: 200px;
-  height: 100px;
+  width: 10%;
+  height: 10%;
   background-color: grey;
   fill: blue;
   overflow: visible;
+  padding-bottom: 2%;
 `;
 
 export default LandingPage;

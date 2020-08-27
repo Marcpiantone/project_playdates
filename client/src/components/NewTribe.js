@@ -28,7 +28,8 @@ const NewTribe = () => {
         name: tribeName,
         description: description,
         members: members,
-        creator: appUser.email,
+        creatorEmail: appUser.email,
+        creatorName: appUser.displayName,
         creatorId: appUser.uid,
       }),
       headers: {
@@ -67,7 +68,7 @@ const NewTribe = () => {
 
   const putEmailsInArray = (value) => {
     setMessageBox("");
-    const splitOnSpace = value.split(" ");
+    const splitOnSpace = value.toLowerCase().split(" ");
     const rejectedEmail = [];
     const splitOnComma = splitOnSpace.toString().split(",");
     const removedUselessSpaceArray = splitOnComma.filter((bit) => bit !== "");
@@ -79,7 +80,8 @@ const NewTribe = () => {
     removedUselessSpaceArray.forEach((email) => {
       const validated = validateEmail(email);
       if (validated) {
-        setMembers((members) => [...members, email]);
+        if (members.indexOf(email) === -1)
+          setMembers((members) => [...members, email]);
       } else {
         console.log(email);
         rejectedEmail.push(email);
@@ -135,6 +137,9 @@ const NewTribe = () => {
               }
               onKeyDown={(ev) => {
                 console.log(ev.key);
+                if (inputValue !== "") {
+                  setMessageBox("Press Enter to add member");
+                }
                 if (ev.key === "Enter") {
                   putEmailsInArray(inputValue);
                   setInputValue("");
@@ -255,6 +260,7 @@ const RemoveButton = styled.button`
   background-color: ${colors.buttons};
   color: ${colors.lighttext};
   margin: 2px;
+  cursor: pointer;
 `;
 
 const BottomDIV = styled.div`
