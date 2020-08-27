@@ -93,6 +93,13 @@ export const colors = {
   shadow: "#d4d4d4", //SOME GREY
 };
 
+export const totemColors = {
+  1: "#06d6a0", //CARIBBEAN GREEN
+  2: "#FFD166", //ORANGE YELLOW CRAYOLA
+  3: "#118AB2", //BLUE NCS
+  4: "#EF476F", //PARADISE PINK
+};
+
 export const numbers = {
   headerFooterHeight: "80px",
 };

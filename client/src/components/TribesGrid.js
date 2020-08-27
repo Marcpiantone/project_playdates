@@ -3,16 +3,30 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FiPlusSquare } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
+import { totems } from "../assets/tribes-totems/totems";
+import { totemColors } from "./GlobalStyles";
 
 const TribesGrid = ({ tribes }) => {
   console.log(tribes);
+
+  console.log(tribes.logo);
   return (
     <Row className={"GRID"}>
       <Grid>
         {console.log(tribes)}
         {tribes !== [] &&
           tribes.map((tribe) => {
-            return <Tribe key={tribe.name}>{tribe.name}</Tribe>;
+            const fill = Object.values(totemColors)[tribe.color];
+            const color = fill;
+            console.log(tribe._id);
+            return (
+              <Tribe key={tribe.name} to={`/tribe/${tribe._id}`}>
+                <LogoSVG viewBox={"0 0 24 24"} style={{ fill }}>
+                  {totems[tribe.logo]}
+                </LogoSVG>
+                <NameDIV style={{ color }}>{tribe.name}</NameDIV>
+              </Tribe>
+            );
           })}
         <CreateTribeTile to="/newtribe">
           <Plus /> Create a new Tribe
@@ -37,7 +51,7 @@ const Grid = styled.div`
   margin: auto;
 `;
 
-const Tribe = styled.button`
+const Tribe = styled(NavLink)`
   border-radius: 20px;
   width: 200px;
   height: 200px;
@@ -52,6 +66,15 @@ const Tribe = styled.button`
   &:hover {
     opacity: 0.5;
   }
+`;
+
+const NameDIV = styled.div`
+  font-size: 1em;
+`;
+
+const LogoSVG = styled.svg`
+  width: 120px;
+  height: 120px;
 `;
 
 const CreateTribeTile = styled(NavLink)`

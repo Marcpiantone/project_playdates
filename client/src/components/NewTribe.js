@@ -8,6 +8,8 @@ import { NavLink, useHistory } from "react-router-dom";
 
 const NewTribe = () => {
   const [tribeName, setTribeName] = useState("");
+  const [logo, setLogo] = useState("");
+  const [color, setColor] = useState("");
   const [description, setDescription] = useState("");
   const [members, setMembers] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -17,7 +19,14 @@ const NewTribe = () => {
 
   const appUser = useSelector(getAppUser);
 
-  const handleNewTribe = (tribeName, description, members, appUser) => {
+  const handleNewTribe = (
+    tribeName,
+    description,
+    members,
+    appUser,
+    logo,
+    color
+  ) => {
     if (!tribeName) {
       return;
     }
@@ -27,6 +36,8 @@ const NewTribe = () => {
       method: "POST",
       body: JSON.stringify({
         name: tribeName,
+        logo: logo,
+        color: color,
         description: description,
         members: members,
         creatorEmail: appUser.email,
@@ -117,6 +128,22 @@ const NewTribe = () => {
             ></INPUT>
           </FormDIV>
           <FormDIV>
+            <LABEL htmlFor={"logo"}>Please pick a Totem</LABEL>
+            <INPUT
+              id={"logo"}
+              placeholder={"Choose a number for now"}
+              onChange={(ev) => setLogo(ev.target.value)}
+            ></INPUT>
+          </FormDIV>
+          <FormDIV>
+            <LABEL htmlFor={"color"}>And a color</LABEL>
+            <INPUT
+              id={"color"}
+              placeholder={"Choose a number for now"}
+              onChange={(ev) => setColor(ev.target.value)}
+            ></INPUT>
+          </FormDIV>
+          <FormDIV>
             <LABEL htmlFor={"description"}>And you have a mission?</LABEL>
             <INPUT
               id={"description"}
@@ -146,7 +173,7 @@ const NewTribe = () => {
               }}
               onChange={(ev) => {
                 if (inputValue !== "") {
-                  setMessageBox("Press ↵enter to add member");
+                  setMessageBox("Press ⏎ enter to add member");
                 }
                 setInputValue(ev.target.value);
               }}
@@ -175,7 +202,14 @@ const NewTribe = () => {
               {tribeName && (
                 <CreateBUTTON
                   onClick={() => {
-                    handleNewTribe(tribeName, description, members, appUser);
+                    handleNewTribe(
+                      tribeName,
+                      description,
+                      members,
+                      appUser,
+                      logo,
+                      color
+                    );
                   }}
                 >
                   Create
