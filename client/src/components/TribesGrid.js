@@ -8,8 +8,6 @@ import { totemColors, colorSelector } from "./GlobalStyles";
 
 const TribesGrid = ({ tribes }) => {
   console.log(tribes);
-
-  console.log(tribes.logo);
   return (
     <Row className={"GRID"}>
       <Grid>
