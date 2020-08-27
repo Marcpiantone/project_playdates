@@ -88,8 +88,10 @@ const createTribe = async (req, res) => {
   client.close();
 };
 
-const handleTribesById = async (req, res) => {
-  const creatorId = req.params.creatorId;
+const handleTribesByEmail = async (req, res) => {
+  const memberEmail = req.params.memberEmail;
+  console.log(req);
+  console.log(memberEmail);
   const client = await MongoClient(MONGO_URI, options);
 
   try {
@@ -98,12 +100,12 @@ const handleTribesById = async (req, res) => {
     const db = client.db("tribes-app");
     const collection = db.collection("tribes");
 
-    const r = await collection.find({ creatorId }).toArray();
+    const r = await collection.find({ members: `${memberEmail}` }).toArray();
     r[0]
       ? res.status(200).json({ status: 200, data: r })
       : res
           .status(404)
-          .json({ status: 404, data: [], message: "creatorId not found, 404" });
+          .json({ status: 404, data: [], message: "member not found, 404" });
   } catch (err) {
     console.error(err.stack);
     res.status(500).json({ status: 500, message: err.message });
@@ -114,5 +116,5 @@ const handleTribesById = async (req, res) => {
 module.exports = {
   handleTribes,
   createTribe,
-  handleTribesById,
+  handleTribesByEmail,
 };

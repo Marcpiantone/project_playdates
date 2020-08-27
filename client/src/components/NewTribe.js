@@ -21,6 +21,7 @@ const NewTribe = () => {
     if (!tribeName) {
       return;
     }
+    members.push(appUser.email);
     console.log(tribeName);
     fetch("/tribes", {
       method: "POST",
@@ -137,15 +138,16 @@ const NewTribe = () => {
               }
               onKeyDown={(ev) => {
                 console.log(ev.key);
-                if (inputValue !== "") {
-                  setMessageBox("Press Enter to add member");
-                }
+
                 if (ev.key === "Enter") {
                   putEmailsInArray(inputValue);
                   setInputValue("");
                 }
               }}
               onChange={(ev) => {
+                if (inputValue !== "") {
+                  setMessageBox("Press ↵enter to add member");
+                }
                 setInputValue(ev.target.value);
               }}
             ></INPUT>
@@ -173,7 +175,6 @@ const NewTribe = () => {
               {tribeName && (
                 <CreateBUTTON
                   onClick={() => {
-                    putEmailsInArray(inputValue);
                     handleNewTribe(tribeName, description, members, appUser);
                   }}
                 >

@@ -11,32 +11,32 @@ import LandingPage from "./LandingPage";
 const Home = () => {
   const dispatch = useDispatch();
   const appUser = useSelector(getAppUser);
-  const userUid = appUser ? appUser.uid : null;
+  const userEmail = appUser ? appUser.email : null;
   const tribesState = useSelector(getTribes);
   const isLoading = tribesState.status === "loading";
 
-  const handleTribes = (userUid) => {
+  const handleTribes = (userEmail) => {
     dispatch(requestTribes());
-    fetch(`/tribes/${userUid}`)
+    fetch(`/tribes/${userEmail}`)
       .then((res) => res.json())
       .then((json) => {
         dispatch(receiveTribes(json.data));
       })
       .catch((err) => console.log(err));
   };
-  console.log(userUid);
-  console.log(!userUid);
+  console.log(userEmail);
+  console.log(!userEmail);
 
   useEffect(() => {
-    if (!userUid) {
+    if (!userEmail) {
       return;
     }
-    handleTribes(userUid);
-  }, [userUid]);
+    handleTribes(userEmail);
+  }, [userEmail]);
 
   return (
     <DIV className={"PageWrapper"}>
-      {!userUid ? (
+      {!userEmail ? (
         <LandingPage />
       ) : isLoading ? (
         <Loading />

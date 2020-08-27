@@ -2,11 +2,10 @@
 
 //header to signUp
 //Sign with email or googleauth
-
+import React from "react";
 import totemsArray from "../assets/tribes-totems/svgarray";
 import { totems } from "../assets/tribes-totems/totems";
-
-import React from "react";
+import { colors } from "./GlobalStyles";
 import styled from "styled-components";
 
 const LandingPage = () => {
@@ -20,7 +19,7 @@ const LandingPage = () => {
       })} */}
       {Object.keys(totems).map((id) => {
         return (
-          <SVG viewBox={"5 21 80% 80%"} preserveAspectRatio={"none"} key={id}>
+          <SVG viewBox={"0 0 24 24"} key={id}>
             {totems[id]}
           </SVG>
         );
@@ -33,13 +32,14 @@ const DIV = styled.div`
   color: black;
 `;
 
+console.log(Math.floor(Math.random() * Object.keys(colors).length));
+
+console.log(Object.keys(colors).length);
 const SVG = styled.svg`
-  width: 10%;
-  height: 10%;
-  background-color: grey;
-  fill: blue;
+  fill: ${Object.values(colors)[
+    Math.floor(Math.floor(Math.random() * Object.keys(colors).length))
+  ]};
   overflow: visible;
-  padding-bottom: 2%;
 `;
 
 export default LandingPage;
