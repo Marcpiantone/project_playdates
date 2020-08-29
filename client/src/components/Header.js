@@ -14,7 +14,7 @@ import { clearTribes } from "../store/actions/tribes";
 
 import logo from "../assets/logo_white.png";
 import { colors, numbers } from "./GlobalStyles";
-import Loading from "./Loading";
+import { getTribesLetter } from "../assets/tribes-totems/totems";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -29,7 +29,6 @@ const Header = () => {
   console.log(status);
 
   useEffect(() => {
-    console.log("SOMETHING WORKS");
     dispatch(returningUserSignin());
   }, []);
 
@@ -41,11 +40,16 @@ const Header = () => {
     history.push("/");
   };
 
+  const tribesLetter = getTribesLetter("25px", "white");
+
+  console.log(typeof tribesLetter);
   return (
     <StyledHeader className={"Header"}>
       <StyledTitleContainerLink to="/">
         <Logo src={logo} alt={"Tribes_logo"} />
-        <TitleSpan>TRIBES</TitleSpan>
+        {tribesLetter.map((letter, index) => {
+          return <div key={index}>{letter}</div>;
+        })}
       </StyledTitleContainerLink>
       {status === "loading" ? (
         <></>

@@ -24,8 +24,6 @@ const Home = () => {
       })
       .catch((err) => console.log(err));
   };
-  console.log(userEmail);
-  console.log(!userEmail);
 
   useEffect(() => {
     if (!userEmail) {

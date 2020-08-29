@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { getAppUser } from "../store/reducers/user.reducer";
 import styled from "styled-components";

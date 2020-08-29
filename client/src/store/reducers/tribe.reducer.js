@@ -22,6 +22,5 @@ export default function tribesReducer(state = initialState, action) {
 }
 
 export const getTribe = (state) => {
-  console.log(state.tribe);
   return state.tribe;
 };

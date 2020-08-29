@@ -1,7 +1,7 @@
 import React from "react";
 
 import styled, { keyframes } from "styled-components";
-import { colors } from "./GlobalStyles";
+import { colors, numbers } from "./GlobalStyles";
 import { ReactComponent as Quatrecentquatre } from "../assets/404.svg";
 
 const Fourofour = () => {
@@ -16,15 +16,14 @@ const Fourofour = () => {
 };
 
 const Wrapper = styled.div`
+  min-height: calc(100vh - ${numbers.headerFooterHeight}*2);
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  text-align: center;
 `;
 
 const DIV = styled.div`
-  padding-left: 75px;
-  padding-right: 75px;
   text-align: center;
 `;
 

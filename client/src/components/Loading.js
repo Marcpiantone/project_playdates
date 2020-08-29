@@ -3,6 +3,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 import logo from "../assets/logo_black.png";
+import { numbers } from "./GlobalStyles";
 
 const Loading = () => {
   return (
@@ -13,11 +14,10 @@ const Loading = () => {
 };
 
 const Wrapper = styled.div`
+  min-height: calc(100vh - ${numbers.headerFooterHeight}*2);
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  align-items: center;
 `;
 
 const spin = keyframes`
@@ -38,10 +38,10 @@ const scale = keyframes`
 
 const fade = keyframes`
   from {
-opacity:0.7
+    opacity:0.6 ;
   }
   to {
-  opacity:0
+    opacity:0 ;
   }`;
 
 const IMG = styled.img`

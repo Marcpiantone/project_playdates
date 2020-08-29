@@ -38,7 +38,7 @@ const handleTribes = async (req, res) => {
   client.close();
 };
 
-const createTribe = async (req, res) => {
+const handleCreateTribe = async (req, res) => {
   newTribe = req.body;
 
   const client = await MongoClient(MONGO_URI, options);
@@ -138,9 +138,48 @@ const handleTribeById = async (req, res) => {
   client.close();
 };
 
+const handleUpdateTribe = async (req, res) => {
+  const _id = req.params._id;
+  const query = { _id: ObjectId(_id) };
+  const newMember = req.body.members;
+  const update = req.body;
+  delete update.members;
+
+  const updateFields =
+    Object.values(update).length !== 0 ? Object.values({ update })[0] : null;
+
+  const newValues =
+    updateFields === null
+      ? { $push: { members: newMember } }
+      : { $set: updateFields, $push: { members: newMember } };
+
+  //console.log(query);
+  console.log(newValues);
+
+  const client = await MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+
+    const db = client.db("tribes-app");
+    const collection = db.collection("tribes");
+
+    const r = await collection.updateOne(query, newValues);
+    assert.equal(1, r.matchedCount);
+    assert.equal(1, r.modifiedCount);
+    r
+      ? res.status(200).json({ status: 200, data: r })
+      : res.status(404).json({ status: 404, message: "Tribe not found, 404" });
+  } catch (err) {
+    console.error(err.stack);
+    res.status(500).json({ status: 500, message: err.message });
+  }
+  client.close();
+};
+
 module.exports = {
   handleTribes,
-  createTribe,
+  handleCreateTribe,
   handleTribesByEmail,
   handleTribeById,
+  handleUpdateTribe,
 };

@@ -1,32 +1,33 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FiPlusSquare } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
-import { totems } from "../assets/tribes-totems/totems";
+import { getTotem } from "../assets/tribes-totems/totems";
 import { totemColors, colorSelector } from "./GlobalStyles";
+import { clearTribes } from "../store/actions/tribes";
 
 const TribesGrid = ({ tribes }) => {
-  console.log(tribes);
+  const dispatch = useDispatch();
   return (
     <Row className={"GRID"}>
       <Grid>
-        {console.log(tribes)}
         {tribes !== [] &&
           tribes.map((tribe) => {
             const color = colorSelector(totemColors, tribe.color);
-            const fill = color;
-            console.log(tribe._id);
+            const totem = getTotem(tribe.logo, "110px", tribe.color);
             return (
-              <Tribe key={tribe.name} to={`/tribe/${tribe._id}`}>
-                <LogoSVG viewBox={"0 0 24 24"} style={{ fill }}>
-                  {totems[tribe.logo]}
-                </LogoSVG>
+              <Tribe
+                key={tribe.name}
+                to={`/tribe/${tribe._id}`}
+                onClick={() => dispatch(clearTribes())}
+              >
+                {totem}
                 <NameDIV style={{ color }}>{tribe.name}</NameDIV>
               </Tribe>
             );
           })}
-        <CreateTribeTile to="/newtribe">
+        <CreateTribeTile to="/newtribe" onClick={() => dispatch(clearTribes())}>
           <Plus /> Create a new Tribe
         </CreateTribeTile>
       </Grid>

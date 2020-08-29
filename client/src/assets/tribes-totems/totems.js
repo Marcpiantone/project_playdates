@@ -1,22 +1,165 @@
 import React from "react";
 
-export const totems = {
-  1: (
-    <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
-  ),
-  2: (
-    <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
-  ),
-  3: (
-    <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
-  ),
-  4: (
-    <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
-  ),
-  5: (
-    <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
-  ),
+import { ReactComponent as Watermelon } from "../tribes-totems/watermelon.svg";
+import { ReactComponent as Penguin } from "../tribes-totems/penguin.svg";
+import { ReactComponent as Atom } from "../tribes-totems/atom.svg";
+import { ReactComponent as Biology } from "../tribes-totems/biology.svg";
+import { ReactComponent as Bird } from "../tribes-totems/bird.svg";
+import { ReactComponent as BlackCat } from "../tribes-totems/black-cat.svg";
+import { ReactComponent as Chick } from "../tribes-totems/chick.svg";
+import { ReactComponent as Compass } from "../tribes-totems/compass.svg";
+import { ReactComponent as Earth } from "../tribes-totems/earth.svg";
+import { ReactComponent as Festival } from "../tribes-totems/festival.svg";
+import { ReactComponent as Ghost } from "../tribes-totems/ghost.svg";
+import { ReactComponent as Icecream } from "../tribes-totems/icecream.svg";
+import { ReactComponent as Lightbulb } from "../tribes-totems/lightbulb.svg";
+import { ReactComponent as Music } from "../tribes-totems/music.svg";
+import { ReactComponent as Parrot } from "../tribes-totems/parrot.svg";
+import { ReactComponent as Pirate } from "../tribes-totems/pirate.svg";
+import { ReactComponent as Puffin } from "../tribes-totems/puffin.svg";
+import { ReactComponent as Pumpkin } from "../tribes-totems/pumpkin.svg";
+import { ReactComponent as Ship } from "../tribes-totems/ship.svg";
+import { ReactComponent as Skull } from "../tribes-totems/skull.svg";
+import { ReactComponent as Spiderweb } from "../tribes-totems/spider-web.svg";
+import { ReactComponent as Unihat } from "../tribes-totems/uni-hat.svg";
+
+import { ReactComponent as T } from "../tribes-totems/T.svg";
+import { ReactComponent as R } from "../tribes-totems/R.svg";
+import { ReactComponent as I } from "../tribes-totems/I.svg";
+import { ReactComponent as B } from "../tribes-totems/B.svg";
+import { ReactComponent as E } from "../tribes-totems/E.svg";
+import { ReactComponent as S } from "../tribes-totems/S.svg";
+
+import {
+  randomColorSelector,
+  totemColors,
+  colorSelector,
+} from "../../components/GlobalStyles";
+
+export const getRandomTotem = (num, height) => {
+  const returnedArray = [];
+  const tribesLetterArray = [];
+  const width = height;
+
+  for (var i = 1; i <= num; i++) {
+    const fill = randomColorSelector(totemColors);
+    const totems = [
+      <Unihat style={{ fill, height, width }} />,
+      <Puffin style={{ fill, height, width }} />,
+      <Pumpkin style={{ fill, height, width }} />,
+      <Ship style={{ fill, height, width }} />,
+      <Skull style={{ fill, height, width }} />,
+      <Spiderweb style={{ fill, height, width }} />,
+      <Watermelon style={{ fill, height, width }} />,
+      <Penguin style={{ fill, height, width }} />,
+      <Atom style={{ fill, height, width }} />,
+      <Biology style={{ fill, height, width }} />,
+      <Bird style={{ fill, height, width }} />,
+      <BlackCat style={{ fill, height, width }} />,
+      <Chick style={{ fill, height, width }} />,
+      <Compass style={{ fill, height, width }} />,
+      <Earth style={{ fill, height, width }} />,
+      <Festival style={{ fill, height, width }} />,
+      <Ghost style={{ fill, height, width }} />,
+      <Icecream style={{ fill, height, width }} />,
+      <Lightbulb style={{ fill, height, width }} />,
+      <Music style={{ fill, height, width }} />,
+      <Parrot style={{ fill, height, width }} />,
+      <Pirate style={{ fill, height, width }} />,
+    ];
+
+    const randomNum = Math.floor(Math.random() * totems.length);
+    returnedArray.push(totems[randomNum]);
+  }
+
+  for (var i = 0; i <= 6; i++) {
+    const fill = randomColorSelector(totemColors);
+    const tribesLetter = [
+      <T style={{ fill, height, width }} />,
+      <R style={{ fill, height, width }} />,
+      <I style={{ fill, height, width }} />,
+      <B style={{ fill, height, width }} />,
+      <E style={{ fill, height, width }} />,
+      <S style={{ fill, height, width }} />,
+    ];
+    tribesLetterArray.push(tribesLetter[i]);
+  }
+  for (var i = 1; i <= 7; i++) {
+    returnedArray.splice(
+      Math.floor(Math.random() * num),
+      0,
+      ...tribesLetterArray
+    );
+  }
+
+  return returnedArray;
 };
+
+export const getTotem = (id, height, color) => {
+  const fill = colorSelector(totemColors, color);
+  const width = height;
+  const totems = [
+    <Unihat style={{ fill, height, width }} />,
+    <Puffin style={{ fill, height, width }} />,
+    <Pumpkin style={{ fill, height, width }} />,
+    <Ship style={{ fill, height, width }} />,
+    <Skull style={{ fill, height, width }} />,
+    <Spiderweb style={{ fill, height, width }} />,
+    <Watermelon style={{ fill, height, width }} />,
+    <Penguin style={{ fill, height, width }} />,
+    <Atom style={{ fill, height, width }} />,
+    <Biology style={{ fill, height, width }} />,
+    <Bird style={{ fill, height, width }} />,
+    <BlackCat style={{ fill, height, width }} />,
+    <Chick style={{ fill, height, width }} />,
+    <Compass style={{ fill, height, width }} />,
+    <Earth style={{ fill, height, width }} />,
+    <Festival style={{ fill, height, width }} />,
+    <Ghost style={{ fill, height, width }} />,
+    <Icecream style={{ fill, height, width }} />,
+    <Lightbulb style={{ fill, height, width }} />,
+    <Music style={{ fill, height, width }} />,
+    <Parrot style={{ fill, height, width }} />,
+    <Pirate style={{ fill, height, width }} />,
+  ];
+
+  return totems[id];
+};
+
+export const getTribesLetter = (height, color) => {
+  const fill = color;
+  const returnedArray = [];
+  const width = height;
+  const tribesLetter = [
+    <T style={{ fill, height, width }} />,
+    <R style={{ fill, height, width }} />,
+    <I style={{ fill, height, width }} />,
+    <B style={{ fill, height, width }} />,
+    <E style={{ fill, height, width }} />,
+    <S style={{ fill, height, width }} />,
+  ];
+
+  returnedArray.push(...tribesLetter);
+  return returnedArray;
+};
+
+// export const totems = {
+//   1: (
+//     <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
+//   ),
+//   2: (
+//     <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
+//   ),
+//   3: (
+//     <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
+//   ),
+//   4: (
+//     <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
+//   ),
+//   5: (
+//     <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z" />
+//   ),
+// };
 
 // export const totems = {
 //   // 1: (

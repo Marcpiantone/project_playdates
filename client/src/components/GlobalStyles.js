@@ -90,7 +90,9 @@ export const colors = {
   lighttext: "#FFFFFF", //WHITE
   darktext: "#073B4C", //MIDNIGHT GREEN EAGLE GREEN
   accent: "#EF476F", //PARADISE PINK
-  shadow: "#d4d4d4", //SOME GREY
+  shadow: "#a8a8a8", //SOME GREY
+  lightershadow: "#dedede", //SOME LIGHTER GREY
+  superlightershadow: "#fafafa", // SOME SUPER LIGHTER GREY
 };
 
 export const totemColors = {
@@ -107,11 +109,12 @@ export const randomColorSelector = (colorFamily) => {
 };
 
 export const colorSelector = (colorFamily, id) => {
-  return Object.values(colorFamily)[id];
+  return Object.values(colorFamily)[id - 1];
 };
 
 export const numbers = {
   headerFooterHeight: "80px",
+  smallerHeaderHeight: "120px",
 };
 
 export default GlobalStyles;

@@ -6,7 +6,6 @@ export const returningUserSignin = () => async (dispatch) => {
   try {
     dispatch({ type: "REQUEST_RETURN" });
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
       if (user) {
         dispatch({
           type: "RETURN_SUCCESS",

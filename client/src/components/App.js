@@ -40,11 +40,6 @@ const StyledPageWrapper = styled.div`
   height: 100%;
 `;
 
-const StyledPage = styled.div`
-  min-height: calc(100vh - ${numbers.headerFooterHeight}*2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const StyledPage = styled.div``;
 
 export default App;
