@@ -62,7 +62,7 @@ const Tribe = () => {
               handleTribe={handleTribe}
               isLoading={isLoading}
             />
-            <TribeEvents />
+            <TribeEvents tribeId={tribeId} />
           </TribeBody>
         </TribeWrapper>
       )}

@@ -31,6 +31,7 @@ const handleGatherings = async (req, res) => {
 
 const handleCreateGathering = async (req, res) => {
   newGathering = req.body;
+  console.log(newGathering);
   const client = await MongoClient(MONGO_URI, options);
 
   try {

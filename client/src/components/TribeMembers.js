@@ -63,7 +63,8 @@ const TribeMembers = ({ tribeId, handleTribe }) => {
         style={{ display: inputVisible ? "block" : "none" }}
         onChange={(ev) => setNewMember(ev.target.value)}
       ></AddMemberInput>
-      {!isLoading && members.map((member) => <div>{member}</div>)}
+      {!isLoading &&
+        members.map((member, index) => <div key={index}>{member}</div>)}
     </MembersDIV>
   );
 };

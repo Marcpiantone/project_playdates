@@ -6,7 +6,6 @@ const initialState = {
 export default function tribesReducer(state = initialState, action) {
   switch (action.type) {
     case "RECEIVE_TRIBE": {
-      console.log(action.tribe);
       return { ...state, tribe: action.tribe, status: "idle" };
     }
     case "REQUEST_TRIBE": {

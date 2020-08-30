@@ -18,7 +18,7 @@ import { getTribesLetter } from "../assets/tribes-totems/totems";
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
-  // const [cookies, setCookie] = useCookies(["returningUser"]);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
