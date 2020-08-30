@@ -65,7 +65,6 @@ const handleCreateTribe = async (req, res) => {
   };
 
   try {
-    console.log(typeof mailSenderFromServer);
     await client.connect();
 
     const db = client.db("tribes-app");
@@ -74,7 +73,7 @@ const handleCreateTribe = async (req, res) => {
     const r = await collection.insertOne(newTribe);
     assert.equal(1, r.insertedCount);
 
-    res.status(200).json({ status: 200, data: r.ops[0] });
+    res.status(201).json({ status: 201, data: r.ops[0] });
 
     sender = r.ops[0].creatorName;
     tribeName = r.ops[0].name;

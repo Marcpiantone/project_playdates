@@ -4,10 +4,11 @@ import { numbers } from "./GlobalStyles";
 import { FiPlusSquare } from "react-icons/fi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { subDays } from "date-fns";
 
 const TribeEvents = () => {
   const [date, setDate] = useState(new Date());
-  console.log(date);
+  console.log(subDays(new Date(), 0));
 
   return (
     <DIV>
@@ -18,6 +19,7 @@ const TribeEvents = () => {
         selected={date}
         value={date}
         onChange={(ev) => setDate(ev)}
+        minDate={new Date()}
         dateFormat="MMMM d, yyyy h:mm aa"
       />
       <CreateBUTTON>

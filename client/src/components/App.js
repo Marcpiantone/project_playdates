@@ -40,6 +40,8 @@ const StyledPageWrapper = styled.div`
   height: 100%;
 `;
 
-const StyledPage = styled.div``;
+const StyledPage = styled.div`
+  min-height: calc(100vh - ${numbers.headerFooterHeight}*2);
+`;
 
 export default App;

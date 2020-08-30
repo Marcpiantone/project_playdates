@@ -6,6 +6,7 @@ const PORT = 8000;
 var app = express();
 
 const tribes = require("./routes/tribesRoute");
+const gatherings = require("./routes/gatheringsRoutes");
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -17,6 +18,7 @@ app.get("/", (req, res) =>
 );
 
 app.use("/tribes", tribes);
+app.use("/gatherings", gatherings);
 
 const server = app.listen(PORT, function () {
   console.info("🌍 Listening on port " + server.address().port);
