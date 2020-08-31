@@ -85,30 +85,51 @@ const handleUpdateGathering = async (req, res) => {
   const updateFields =
     Object.values(update).length !== 0 ? Object.values({ update })[0] : null;
 
-  const newValues =
-    updateFields === null
-      ? { $push: { attendees: newAttendee } }
-      : { $set: updateFields, $push: { attendees: newAttendee } };
-
-  console.log(newValues);
-
   const client = await MongoClient(MONGO_URI, options);
+
   try {
     await client.connect();
 
     const db = client.db("tribes-app");
     const collection = db.collection("gatherings");
 
-    const r = await collection.updateOne(query, newValues);
-    assert.equal(1, r.matchedCount);
-    assert.equal(1, r.modifiedCount);
-    r
-      ? res.status(200).json({ status: 200, data: r })
-      : res.status(404).json({ status: 404, message: "Event not found, 404" });
+    const v = await collection.findOne(query);
+    if (v.attendees.includes(newAttendee)) {
+      const newValues =
+        updateFields === null
+          ? { $pull: { attendees: newAttendee } }
+          : { $set: updateFields, $pull: { attendees: newAttendee } };
+
+      console.log(newValues);
+      const r = await collection.updateOne(query, newValues);
+      assert.equal(1, r.matchedCount);
+      assert.equal(1, r.modifiedCount);
+      r
+        ? res.status(200).json({ status: 200, data: r })
+        : res
+            .status(404)
+            .json({ status: 404, message: "Event not found, 404" });
+    } else {
+      const newValues =
+        updateFields === null
+          ? { $push: { attendees: newAttendee } }
+          : { $set: updateFields, $push: { attendees: newAttendee } };
+
+      console.log(newValues);
+      const r = await collection.updateOne(query, newValues);
+      assert.equal(1, r.matchedCount);
+      assert.equal(1, r.modifiedCount);
+      r
+        ? res.status(200).json({ status: 200, data: r })
+        : res
+            .status(404)
+            .json({ status: 404, message: "Event not found, 404" });
+    }
   } catch (err) {
     console.error(err.stack);
     res.status(500).json({ status: 500, message: err.message });
   }
+
   client.close();
 };
 

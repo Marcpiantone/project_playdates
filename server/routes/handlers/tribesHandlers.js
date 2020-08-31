@@ -152,7 +152,6 @@ const handleUpdateTribe = async (req, res) => {
       ? { $push: { members: newMember } }
       : { $set: updateFields, $push: { members: newMember } };
 
-  //console.log(query);
   console.log(newValues);
 
   const client = await MongoClient(MONGO_URI, options);

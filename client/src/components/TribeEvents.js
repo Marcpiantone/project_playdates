@@ -31,7 +31,7 @@ const TribeEvents = ({ tribeId }) => {
         tribeId: tribeId,
         eventName: eventName,
         date: date,
-        members: [creatorEmail],
+        attendees: [creatorEmail],
         creatorEmail: creatorEmail,
       }),
       headers: {
@@ -96,7 +96,14 @@ const TribeEvents = ({ tribeId }) => {
       <EventsDIV>
         {!isLoading &&
           events.map((event) => {
-            return <Event event={event} />;
+            return (
+              <Event
+                key={event._id}
+                event={event}
+                handleEvents={handleEvents}
+                tribeId={tribeId}
+              />
+            );
           })}
       </EventsDIV>
     </DIV>
