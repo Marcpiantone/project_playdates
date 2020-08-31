@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { getAppUser } from "../store/reducers/user.reducer";
-import styled from "styled-components";
-import { colors } from "./GlobalStyles";
+import styled, { keyframes } from "styled-components";
+import { colors, numbers } from "./GlobalStyles";
 import { NavLink, useHistory } from "react-router-dom";
+
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const NewTribe = () => {
   const [tribeName, setTribeName] = useState("");
@@ -14,6 +16,7 @@ const NewTribe = () => {
   const [members, setMembers] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [messageBox, setMessageBox] = useState("");
+  const [divVisible, setDivVisible] = useState(1);
 
   const history = useHistory();
 
@@ -101,7 +104,6 @@ const NewTribe = () => {
       }
     });
   };
-  console.log(members);
 
   const removeMember = (member) => {
     let membersCopy = [...members];
@@ -110,80 +112,35 @@ const NewTribe = () => {
     setMembers(membersCopy);
   };
 
-  console.log(members[0]);
-
-  console.log(messageBox);
-
   return (
-    <>
-      <DIV>
-        <TitleDiv> So... You're starting a new Tribe ?</TitleDiv>
-        <FORM autoComplete={"off"}>
-          <FormDIV>
-            <LABEL htmlFor={"name"}>How should we name it?</LABEL>
-            <INPUT
-              id={"name"}
-              placeholder={namePlaceholder}
-              onChange={(ev) => setTribeName(ev.target.value)}
-            ></INPUT>
-          </FormDIV>
-          <FormDIV>
-            <LABEL htmlFor={"logo"}>Please pick a Totem</LABEL>
-            <INPUT
-              id={"logo"}
-              placeholder={"Choose a number for now"}
-              onChange={(ev) => setLogo(ev.target.value)}
-            ></INPUT>
-          </FormDIV>
-          <FormDIV>
-            <LABEL htmlFor={"color"}>And a color</LABEL>
-            <INPUT
-              id={"color"}
-              placeholder={"Choose a number for now"}
-              onChange={(ev) => setColor(ev.target.value)}
-            ></INPUT>
-          </FormDIV>
-          <FormDIV>
-            <LABEL htmlFor={"description"}>And you have a mission?</LABEL>
-            <INPUT
-              id={"description"}
-              placeholder={missionPlaceholder}
-              onChange={(ev) => setDescription(ev.target.value)}
-            ></INPUT>
-          </FormDIV>
-          <FormDIV>
-            <LABEL htmlFor={"members"}>
-              Who are the members of this Tribe?
-            </LABEL>
-            <INPUT
-              id={"members"}
-              value={inputValue}
-              placeholder={
-                members[0] !== undefined
-                  ? "Who else ?"
-                  : "Send invites now ...or later!"
-              }
-              onKeyDown={(ev) => {
-                console.log(ev.key);
+    <DIV>
+      <SliderBUTTON
+        style={{ visibility: divVisible > 1 ? "visible" : "hidden" }}
+        onClick={() => (divVisible > 1 ? setDivVisible(divVisible - 1) : null)}
+      >
+        <FiArrowLeft />
+      </SliderBUTTON>
 
-                if (ev.key === "Enter") {
-                  putEmailsInArray(inputValue);
-                  setInputValue("");
-                }
-              }}
-              onChange={(ev) => {
-                if (inputValue !== "") {
-                  setMessageBox("Press ⏎ enter to add member");
-                }
-                setInputValue(ev.target.value);
-              }}
-            ></INPUT>
-          </FormDIV>
-        </FORM>
-        <BottomDIV>
-          {messageBox !== undefined && (
-            <MessageBoxDIV>{messageBox}</MessageBoxDIV>
-          )}
+      <FORM>
+        <TitleDiv> So... You're starting a new Tribe ?</TitleDiv>
+        <FormDIV style={{ display: divVisible !== 1 ? "none" : null }}>
+          <LABEL htmlFor={"name"}>How should we name it?</LABEL>
+          <INPUT
+            id={"name"}
+            placeholder={namePlaceholder}
+            onChange={(ev) => setTribeName(ev.target.value)}
+          ></INPUT>
+        </FormDIV>
+        <FormDIV style={{ display: divVisible !== 2 ? "none" : null }}>
+          <LABEL htmlFor={"description"}>And you have a mission?</LABEL>
+          <INPUT
+            id={"description"}
+            placeholder={missionPlaceholder}
+            onChange={(ev) => setDescription(ev.target.value)}
+          ></INPUT>
+        </FormDIV>
+        <FormDIV style={{ display: divVisible !== 3 ? "none" : null }}>
+          <LABEL htmlFor={"members"}>Who are the members of this Tribe?</LABEL>
           <EmailTagsDIV>
             {members.map((member) => {
               return (
@@ -195,37 +152,81 @@ const NewTribe = () => {
                 </EmailTags>
               );
             })}
+            <MembersINPUT
+              id={"members"}
+              value={inputValue}
+              placeholder={
+                members[0] !== undefined
+                  ? "...who else ?"
+                  : "Send invites now ...or later!"
+              }
+              onKeyDown={(ev) => {
+                console.log(ev.key);
+                if (ev.key === "Enter") {
+                  putEmailsInArray(inputValue);
+                  setInputValue("");
+                }
+              }}
+              onChange={(ev) => {
+                if (inputValue !== "") {
+                  setMessageBox("Press ⏎ enter to add member");
+                }
+                setInputValue(ev.target.value);
+              }}
+            ></MembersINPUT>
           </EmailTagsDIV>
-          <ButtonDIV>
-            <ButtonWrapper>
-              <HomeBUTTON to={"/"}>Cancel</HomeBUTTON>
-              {tribeName && (
-                <CreateBUTTON
-                  onClick={() => {
-                    handleNewTribe(
-                      tribeName,
-                      description,
-                      members,
-                      appUser,
-                      logo,
-                      color
-                    );
-                  }}
-                >
-                  Create
-                </CreateBUTTON>
-              )}
-            </ButtonWrapper>
-          </ButtonDIV>
-        </BottomDIV>
-      </DIV>
-    </>
+          {messageBox !== undefined && (
+            <MessageBoxDIV>{messageBox}</MessageBoxDIV>
+          )}
+        </FormDIV>
+      </FORM>
+      <SliderBUTTON
+        style={{ visibility: divVisible < 3 ? "visible" : "hidden" }}
+        onClick={() => (divVisible < 3 ? setDivVisible(divVisible + 1) : null)}
+      >
+        <FiArrowRight />
+      </SliderBUTTON>
+      <BottomDIV>
+        <ButtonDIV>
+          <ButtonWrapper>
+            <HomeBUTTON to={"/"}>Cancel</HomeBUTTON>
+            {tribeName && (
+              <CreateBUTTON
+                onClick={() => {
+                  handleNewTribe(
+                    tribeName,
+                    description,
+                    members,
+                    appUser,
+                    logo,
+                    color
+                  );
+                }}
+              >
+                Create
+              </CreateBUTTON>
+            )}
+          </ButtonWrapper>
+        </ButtonDIV>
+      </BottomDIV>
+    </DIV>
   );
 };
 
 const DIV = styled.div`
-  position: absolute;
-  top: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - ${numbers.headerFooterHeight}*2);
+`;
+
+const SliderBUTTON = styled.button`
+  background: none;
+  border: none;
+  height: 100px;
+  width: 100px;
+  font-size: 3em;
+  color: ${colors.shadow};
 `;
 
 const TitleDiv = styled.div`
@@ -235,7 +236,15 @@ const TitleDiv = styled.div`
   text-align: center;
 `;
 
-const FORM = styled.form`
+const fadeIn = keyframes`
+  from {
+opacity:0.1
+  }
+  to {
+  opacity:1
+  }`;
+
+const FORM = styled.div`
   display: flex;
   flex-direction: column;
   color: ${colors.darktext};
@@ -244,8 +253,10 @@ const FORM = styled.form`
 
 const FormDIV = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding-top: 15px;
+  animation: ${fadeIn} 700ms linear;
 `;
 
 const LABEL = styled.label`
@@ -256,7 +267,19 @@ const INPUT = styled.input`
   outline: none;
   border: solid 1px ${colors.shadow};
   border-radius: 5px;
-  width: 350px;
+  width: 100%;
+  height: 40px;
+  font-size: 1.5em;
+  &::placeholder {
+    color: ${colors.shadow};
+  }
+`;
+
+const MembersINPUT = styled.input`
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
   height: 40px;
   font-size: 1.5em;
   &::placeholder {
@@ -273,7 +296,8 @@ const MessageBoxDIV = styled.div`
 const EmailTagsDIV = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  border: solid 1px ${colors.shadow};
+  border-radius: 5px;
 `;
 
 const EmailTags = styled.span`
