@@ -10,13 +10,13 @@ import { clearTribes } from "../store/actions/tribes";
 const TribesGrid = ({ tribes }) => {
   const dispatch = useDispatch();
   return (
-    <Row className={"GRID"}>
-      <Grid>
-        {tribes !== [] &&
-          tribes.map((tribe) => {
-            const color = colorSelector(totemColors, tribe.color);
-            const totem = getTotem(tribe.logo, "110px", tribe.color);
-            return (
+    <Grid>
+      {tribes !== [] &&
+        tribes.map((tribe) => {
+          const color = colorSelector(totemColors, tribe.color);
+          const totem = getTotem(tribe.logo, "110px", tribe.color);
+          return (
+            <TribeWrapper>
               <Tribe
                 key={tribe.name}
                 to={`/tribe/${tribe._id}`}
@@ -25,36 +25,51 @@ const TribesGrid = ({ tribes }) => {
                 {totem}
                 <NameDIV style={{ color }}>{tribe.name}</NameDIV>
               </Tribe>
-            );
-          })}
+            </TribeWrapper>
+          );
+        })}
+      <TribeWrapper>
         <CreateTribeTile to="/newtribe" onClick={() => dispatch(clearTribes())}>
           <Plus /> Create a new Tribe
         </CreateTribeTile>
-      </Grid>
-    </Row>
+      </TribeWrapper>
+    </Grid>
   );
 };
 
-const Row = styled.div`
-  width: 100%;
-  margin: auto;
-`;
-const Grid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-content: space-around;
+// const Grid = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   align-content: space-around;
+//   text-align: center;
+//   color: black;
+//   align-items: right;
+//   margin: auto;
+// `;
+
+const Grid = styled.section`
+  width: 80vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-content: center;
   text-align: center;
-  color: black;
-  align-items: right;
+  padding: 20px;
+`;
+
+const TribeWrapper = styled.div`
   margin: auto;
 `;
 
 const Tribe = styled(NavLink)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 20px;
   width: 200px;
   height: 200px;
-  margin: 30px;
+  margin: 20px;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 20px 2px rgba(204, 204, 204, 1);
   -moz-box-shadow: 0px 0px 20px 2px rgba(204, 204, 204, 1);
@@ -71,11 +86,6 @@ const NameDIV = styled.div`
   font-size: 1em;
 `;
 
-const LogoSVG = styled.svg`
-  width: 120px;
-  height: 120px;
-`;
-
 const CreateTribeTile = styled(NavLink)`
   color: black;
   display: flex;
@@ -85,7 +95,7 @@ const CreateTribeTile = styled(NavLink)`
   border-radius: 20px;
   width: 200px;
   height: 200px;
-  margin: 30px;
+  margin: 20px;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 20px 2px rgba(204, 204, 204, 1);
   -moz-box-shadow: 0px 0px 20px 2px rgba(204, 204, 204, 1);
