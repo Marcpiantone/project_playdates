@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { FiCheckSquare } from "react-icons/fi";
+import { FiCheckSquare, FiXSquare } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvents } from "../store/reducers/events.reducer";
 import moment, { format } from "moment";
@@ -10,12 +10,8 @@ import { colors } from "./GlobalStyles";
 const Event = ({ event, handleEvents, tribeId }) => {
   const [isHovered, setIsHovered] = useState(false);
   const appUser = useSelector(getAppUser);
-  const events = useSelector(getEvents);
-  console.log(events);
 
   const isOptedIn = event.attendees.includes(appUser.email);
-
-  console.log("OPTED IN " + isOptedIn);
 
   const humanDate = moment(new Date(event.date)).format("DD-MMM @ h:mm A");
 
@@ -40,25 +36,30 @@ const Event = ({ event, handleEvents, tribeId }) => {
       key={event._id}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{
-        backgroundColor: isOptedIn
-          ? `${colors.primary}`
-          : `${colors.lightershadow}`,
-        opacity: isOptedIn ? 1 : 0.7,
-      }}
     >
       <Visible>
         <EventName>{event.eventName}</EventName>
         <AlignRight>
           <EventDate>{humanDate}</EventDate>
-          <OptInBUTTON
-            onClick={() => {
-              toggleOptedIn(appUser.email);
-            }}
-          >
-            <FiCheckSquare />
-            I'm in
-          </OptInBUTTON>
+          {!isOptedIn ? (
+            <OptInBUTTON
+              onClick={() => {
+                toggleOptedIn(appUser.email);
+              }}
+            >
+              <FiCheckSquare />
+              I'm in
+            </OptInBUTTON>
+          ) : (
+            <OptInBUTTON
+              onClick={() => {
+                toggleOptedIn(appUser.email);
+              }}
+            >
+              <FiXSquare />
+              I'm out!
+            </OptInBUTTON>
+          )}
         </AlignRight>
       </Visible>
       {isHovered && (
@@ -80,6 +81,7 @@ const Eventbox = styled.div`
   margin: 5px;
   padding: 8px;
   color: ${colors.darktext};
+  border: solid 1px ${colors.shadow};
 `;
 
 const Visible = styled.div`
@@ -108,11 +110,16 @@ const Hidden = styled.div`
 `;
 
 const OptInBUTTON = styled.button`
+  color: ${colors.darktext};
+  border: solid 1px ${colors.shadow};
+  width: 75px;
   display: flex;
+  justify-content: center;
   align-items: center;
   height: 30px;
   border-radius: 5px;
-  border: none;
 `;
+
+const InIcon = styled(FiCheckSquare);
 
 export default Event;
