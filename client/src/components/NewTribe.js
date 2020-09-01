@@ -3,20 +3,26 @@ import { useSelector } from "react-redux";
 
 import { getAppUser } from "../store/reducers/user.reducer";
 import styled, { keyframes } from "styled-components";
-import { colors, numbers } from "./GlobalStyles";
+import { colors, numbers, totemColors, colorSelector } from "./GlobalStyles";
 import { NavLink, useHistory } from "react-router-dom";
 
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import {
+  getRandomTotem,
+  getTotemsArray,
+  getTotem,
+} from "../assets/tribes-totems/totems";
 
 const NewTribe = () => {
   const [tribeName, setTribeName] = useState("");
   const [logo, setLogo] = useState("");
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState(1);
   const [description, setDescription] = useState("");
   const [members, setMembers] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [messageBox, setMessageBox] = useState("");
   const [divVisible, setDivVisible] = useState(1);
+  const [isHovered, setIsHovered] = useState(false);
 
   const history = useHistory();
 
@@ -112,6 +118,17 @@ const NewTribe = () => {
     setMembers(membersCopy);
   };
 
+  const TotemExample = !logo
+    ? getRandomTotem(1, "100px", false)
+    : getTotem(logo, "100px", color);
+
+  const totems = getTotemsArray("50px", colors.lighttext);
+
+  const toggleDivVisible = () => {
+    if (divVisible < 4) {
+      setDivVisible(divVisible + 1);
+    }
+  };
   return (
     <DIV>
       <SliderBUTTON
@@ -120,7 +137,6 @@ const NewTribe = () => {
       >
         <FiArrowLeft />
       </SliderBUTTON>
-
       <FORM>
         <TitleDiv> So... You're starting a new Tribe ?</TitleDiv>
         <FormDIV style={{ display: divVisible !== 1 ? "none" : null }}>
@@ -129,6 +145,7 @@ const NewTribe = () => {
             id={"name"}
             placeholder={namePlaceholder}
             onChange={(ev) => setTribeName(ev.target.value)}
+            onKeyDown={(ev) => (ev.key === "Enter" ? toggleDivVisible() : null)}
           ></INPUT>
         </FormDIV>
         <FormDIV style={{ display: divVisible !== 2 ? "none" : null }}>
@@ -137,9 +154,58 @@ const NewTribe = () => {
             id={"description"}
             placeholder={missionPlaceholder}
             onChange={(ev) => setDescription(ev.target.value)}
+            onKeyDown={(ev) => (ev.key === "Enter" ? toggleDivVisible() : null)}
           ></INPUT>
         </FormDIV>
-        <FormDIV style={{ display: divVisible !== 3 ? "none" : null }}>
+        <TotemFormDIV
+          style={{ display: divVisible !== 3 ? "none" : null }}
+          onKeyDown={(ev) => (ev.key === "Enter" ? toggleDivVisible() : null)}
+        >
+          <LABEL htmlFor={"totem"}>Pick a totem for your Tribe</LABEL>
+          <CenterDIV>
+            <TotemRandom
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              {TotemExample}
+            </TotemRandom>
+          </CenterDIV>
+          <ColorPicker>
+            {Object.values(totemColors).map((shade, index) => {
+              return (
+                <ColorSelector
+                  key={index}
+                  style={{
+                    backgroundColor: shade,
+                    opacity: index === color ? 1 : 0.3,
+                  }}
+                  onClick={() => setColor(index)}
+                />
+              );
+            })}
+          </ColorPicker>
+          {isHovered && (
+            <TotemPicker
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              {totems.map((totem, index) => {
+                return (
+                  <TotemSelector
+                    key={index}
+                    onClick={() => {
+                      setLogo(index);
+                      setIsHovered(false);
+                    }}
+                  >
+                    {totem}
+                  </TotemSelector>
+                );
+              })}
+            </TotemPicker>
+          )}
+        </TotemFormDIV>
+        <FormDIV style={{ display: divVisible !== 4 ? "none" : null }}>
           <LABEL htmlFor={"members"}>Who are the members of this Tribe?</LABEL>
           <EmailTagsDIV>
             {members.map((member) => {
@@ -179,36 +245,37 @@ const NewTribe = () => {
             <MessageBoxDIV>{messageBox}</MessageBoxDIV>
           )}
         </FormDIV>
+        <BottomDIV>
+          <ButtonDIV>
+            <ButtonWrapper>
+              <HomeBUTTON to={"/"}>Cancel</HomeBUTTON>
+              {tribeName && (
+                <CreateBUTTON
+                  onClick={() => {
+                    handleNewTribe(
+                      tribeName,
+                      description,
+                      members,
+                      appUser,
+                      logo,
+                      color
+                    );
+                  }}
+                >
+                  Create
+                </CreateBUTTON>
+              )}
+            </ButtonWrapper>
+          </ButtonDIV>
+        </BottomDIV>
       </FORM>
+
       <SliderBUTTON
-        style={{ visibility: divVisible < 3 ? "visible" : "hidden" }}
-        onClick={() => (divVisible < 3 ? setDivVisible(divVisible + 1) : null)}
+        style={{ visibility: divVisible < 4 ? "visible" : "hidden" }}
+        onClick={() => toggleDivVisible()}
       >
         <FiArrowRight />
       </SliderBUTTON>
-      <BottomDIV>
-        <ButtonDIV>
-          <ButtonWrapper>
-            <HomeBUTTON to={"/"}>Cancel</HomeBUTTON>
-            {tribeName && (
-              <CreateBUTTON
-                onClick={() => {
-                  handleNewTribe(
-                    tribeName,
-                    description,
-                    members,
-                    appUser,
-                    logo,
-                    color
-                  );
-                }}
-              >
-                Create
-              </CreateBUTTON>
-            )}
-          </ButtonWrapper>
-        </ButtonDIV>
-      </BottomDIV>
     </DIV>
   );
 };
@@ -231,7 +298,7 @@ const SliderBUTTON = styled.button`
 
 const TitleDiv = styled.div`
   color: ${colors.shadow};
-  font-size: 3em;
+  font-size: 2em;
   padding: 30px;
   text-align: center;
 `;
@@ -254,8 +321,17 @@ const FORM = styled.div`
 const FormDIV = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding-top: 15px;
+  animation: ${fadeIn} 700ms linear;
+`;
+
+const TotemFormDIV = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
   animation: ${fadeIn} 700ms linear;
 `;
 
@@ -273,6 +349,39 @@ const INPUT = styled.input`
   &::placeholder {
     color: ${colors.shadow};
   }
+`;
+
+const TotemRandom = styled.div``;
+
+const CenterDIV = styled.div`
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 0px 0px 20px 2px rgba(204, 204, 204, 1);
+`;
+const TotemPicker = styled.div`
+  position: absolute;
+  top: 455px;
+  z-index: 2;
+`;
+
+const TotemSelector = styled.button`
+  background-color: ${colors.secondary};
+  border: none;
+  cursor: pointer;
+`;
+
+const ColorPicker = styled.div``;
+
+const ColorSelector = styled.button`
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  border: none;
 `;
 
 const MembersINPUT = styled.input`
@@ -323,14 +432,10 @@ const RemoveButton = styled.button`
 `;
 
 const BottomDIV = styled.div`
-  height: 150px;
+  padding-top: 15px;
 `;
 
-const ButtonDIV = styled.div`
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-`;
+const ButtonDIV = styled.div``;
 
 const ButtonWrapper = styled.div`
   display: flex;

@@ -109,7 +109,7 @@ export const randomColorSelector = (colorFamily) => {
 };
 
 export const colorSelector = (colorFamily, id) => {
-  return Object.values(colorFamily)[id - 1];
+  return Object.values(colorFamily)[id];
 };
 
 export const numbers = {

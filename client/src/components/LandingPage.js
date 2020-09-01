@@ -9,7 +9,7 @@ import styled, { keyframes } from "styled-components";
 import { numbers } from "./GlobalStyles";
 
 const LandingPage = () => {
-  const totems = getRandomTotem(500, "50px");
+  const totems = getRandomTotem(500, "50px", true);
 
   return (
     <DIV>

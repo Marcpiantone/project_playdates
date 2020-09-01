@@ -129,10 +129,6 @@ const Logo = styled.img`
   height: 70px;
 `;
 
-const TitleSpan = styled.span`
-  font-size: 2em;
-`;
-
 const StyledUserContainer = styled.div`
   display: flex;
   flex-direction: row;

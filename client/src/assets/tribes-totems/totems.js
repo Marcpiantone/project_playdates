@@ -36,7 +36,43 @@ import {
   colorSelector,
 } from "../../components/GlobalStyles";
 
-export const getRandomTotem = (num, height) => {
+export const getTotemsArray = (height, color) => {
+  const returnedArray = [];
+  const fill = color;
+  const width = height;
+  const totems = [
+    <Unihat style={{ fill, height, width }} />,
+    <Puffin style={{ fill, height, width }} />,
+    <Pumpkin style={{ fill, height, width }} />,
+    <Ship style={{ fill, height, width }} />,
+    <Skull style={{ fill, height, width }} />,
+    <Spiderweb style={{ fill, height, width }} />,
+    <Watermelon style={{ fill, height, width }} />,
+    <Penguin style={{ fill, height, width }} />,
+    <Atom style={{ fill, height, width }} />,
+    <Biology style={{ fill, height, width }} />,
+    <Bird style={{ fill, height, width }} />,
+    <BlackCat style={{ fill, height, width }} />,
+    <Chick style={{ fill, height, width }} />,
+    <Compass style={{ fill, height, width }} />,
+    <Earth style={{ fill, height, width }} />,
+    <Festival style={{ fill, height, width }} />,
+    <Ghost style={{ fill, height, width }} />,
+    <Icecream style={{ fill, height, width }} />,
+    <Lightbulb style={{ fill, height, width }} />,
+    <Music style={{ fill, height, width }} />,
+    <Parrot style={{ fill, height, width }} />,
+    <Pirate style={{ fill, height, width }} />,
+  ];
+
+  for (var i = 0; i < totems.length; i++) {
+    returnedArray.push(totems[i]);
+  }
+
+  return returnedArray;
+};
+
+export const getRandomTotem = (num, height, tribesName) => {
   const returnedArray = [];
   const tribesLetterArray = [];
   const width = height;
@@ -72,24 +108,26 @@ export const getRandomTotem = (num, height) => {
     returnedArray.push(totems[randomNum]);
   }
 
-  for (var i = 0; i <= 6; i++) {
-    const fill = randomColorSelector(totemColors);
-    const tribesLetter = [
-      <T style={{ fill, height, width }} />,
-      <R style={{ fill, height, width }} />,
-      <I style={{ fill, height, width }} />,
-      <B style={{ fill, height, width }} />,
-      <E style={{ fill, height, width }} />,
-      <S style={{ fill, height, width }} />,
-    ];
-    tribesLetterArray.push(tribesLetter[i]);
-  }
-  for (var i = 1; i <= 7; i++) {
-    returnedArray.splice(
-      Math.floor(Math.random() * num),
-      0,
-      ...tribesLetterArray
-    );
+  if (tribesName === true) {
+    for (var i1 = 0; i1 <= 6; i1++) {
+      const fill = randomColorSelector(totemColors);
+      const tribesLetter = [
+        <T style={{ fill, height, width }} />,
+        <R style={{ fill, height, width }} />,
+        <I style={{ fill, height, width }} />,
+        <B style={{ fill, height, width }} />,
+        <E style={{ fill, height, width }} />,
+        <S style={{ fill, height, width }} />,
+      ];
+      tribesLetterArray.push(tribesLetter[i1]);
+    }
+    for (var i2 = 1; i2 <= 7; i2++) {
+      returnedArray.splice(
+        Math.floor(Math.random() * num),
+        0,
+        ...tribesLetterArray
+      );
+    }
   }
 
   return returnedArray;
